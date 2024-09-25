@@ -10,7 +10,7 @@ namespace Computer
     {
         public int ID {  get; set; }
         public string Name { get; set; }
-        public string IsBoy { get; set; }
+        public bool IsBoy { get; set; }
         public List<Music> Musics { get; set; }
     }
 }
