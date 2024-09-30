@@ -3,8 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Computer.ListViewPage"
              Title="ListViewPage">
-    <StackLayout>
-        <Border Margin="10" Padding="10" Stroke="Aqua" StrokeThickness="10">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Margin="10" Padding="10" Stroke="Aqua" StrokeThickness="10">
             <ListView ItemsSource="{Binding Singers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -21,5 +27,12 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Border>
-    </StackLayout>
+
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0, 0, 0, 20">
+            <Button WidthRequest="80"  Margin="0, 5, 0, 5" Text="Back"/>
+            <Button WidthRequest="80"  Margin="10, 5, 0, 5" Text="Add"/>
+            <Button WidthRequest="80"  Margin="10, 5, 0, 5" Text="Edit"/>
+            <Button WidthRequest="80"  Margin="10, 5, 0, 5" Text="Delete"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>
