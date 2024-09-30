@@ -11,19 +11,19 @@ namespace Computer
     internal class DataBase
     {
         public DataBase()
-        { 
-            GetFullMusicDataBase();
+        {
+            GetFullData();
+        }
+
+        private async void GetFullData()
+        {
+            await Task.Delay(1000);
+            singers = await GetAllSingers();
+            musics = await GetAllMusics();
         }
 
         private List<Singer> singers = new();
         private List<Music> musics = new();
-
-        private DataBase instance;
-        private async Task<DataBase> GetConnection()
-        {
-            await Task.Delay(3000);
-            return instance ??= new DataBase();
-        }
 
         public async Task<List<Singer>> GetFullSingerDataBase()
         { 
@@ -43,7 +43,7 @@ namespace Computer
             return new List<Music>()
             {
                 new Music { ID = 0, Title = "Ляляля", Description = "Первая песенка певца"},
-                new Music { ID = 0, Title = "Лелеле", Description = "Вторая песенка певца"},
+                new Music { ID = 1, Title = "Лелеле", Description = "Вторая песенка певца"},
                 new Music { ID = 0, Title = "Лололо", Description = "Третья песенка певца"}
             };
         }
@@ -125,7 +125,7 @@ namespace Computer
         public async Task<List<Singer>> GetAllSingers()
         {
             await Task.Delay(1000);
-            return new List<Singer>(singers);
+            return new List<Singer>( await GetFullSingerDataBase());
         }
 
         public async Task<List<Music>> GetAllMusics()

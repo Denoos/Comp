@@ -3,10 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Computer.ListViewPage"
              Title="ListViewPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <StackLayout>
+        <Border Margin="10" Padding="10" Stroke="Aqua" StrokeThickness="10">
+            <ListView ItemsSource="{Binding Singers}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <HorizontalStackLayout>
+                                <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding Name}"/>
+                                <HorizontalStackLayout RadioButtonGroup.GroupName="VM">
+                                    <RadioButton Content="v"/>
+                                    <RadioButton Content="m"/>
+                                </HorizontalStackLayout>
+                            </HorizontalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Border>
+    </StackLayout>
 </ContentPage>
