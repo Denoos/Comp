@@ -10,12 +10,18 @@ namespace Computer
 {
     internal class DataBase
     {
+        public DataBase()
+        { 
+            GetFullMusicDataBase();
+        }
+
         private List<Singer> singers = new();
-        public List<Music> musics = new();
+        private List<Music> musics = new();
 
         private DataBase instance;
-        private DataBase GetConnection()
+        private async Task<DataBase> GetConnection()
         {
+            await Task.Delay(3000);
             return instance ??= new DataBase();
         }
 
@@ -95,8 +101,7 @@ namespace Computer
             foreach (var s in singers)
                 if (s.ID == id)
                 { 
-                    var singer = new Singer();
-                    singer = s;
+                    var singer = s;
                     return singer;
                 }
 
@@ -110,8 +115,7 @@ namespace Computer
             foreach (var m in musics)
                 if (m.ID == id)
                 {
-                    var music = new Music();
-                    music = m;
+                    var music = m;
                     return music;
                 }
 

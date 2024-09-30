@@ -3,4 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Computer.MainPage">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="0,0,0,20"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout>
+        <Button Text="ListView" Clicked="ListViewClicked"/>
+        <Button Text="CollectionView" Clicked="CollectionViewClicked"/>
+        <Button Text="CarouseView" Clicked="CarouseViewClicked"/>
+    </VerticalStackLayout>
 </ContentPage>
