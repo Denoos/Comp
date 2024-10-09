@@ -1,67 +1,125 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Computer
 {
     internal class DataBase
     {
+        private static DataBase inst;
+        public static DataBase Instance { get { return inst ??= new(); } }
+
+        public int AutoIncrementSingers = 1;
+        public int AutoIncrementMusic = 1;
+
         public DataBase()
         {
             GetFullData();
         }
 
-        private async void GetFullData()
+        public async void GetFullData()
         {
             await Task.Delay(1000);
-            singers = await GetAllSingers();
-            musics = await GetAllMusics();
+            singers = await GetFullSingerDataBase();
+            musics = await GetFullMusicDataBase();
         }
 
-        private List<Singer> singers = new();
-        private List<Music> musics = new();
+        private List<Singer> singers = [];
+        private List<Music> musics = [];
 
         public async Task<List<Singer>> GetFullSingerDataBase()
         { 
             await Task.Delay(100);
-            
-            return new List<Singer>()
-            {
-                new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+            AutoIncrementSingers += 3;
+            AutoIncrementMusic += 9;
+
+            return
+            [
+                new() { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new() { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new() { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }
+                
+                
+               /*  Too many singers
+                , new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
                 new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
-                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() } 
-            };
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() }, new Singer { ID = 0, IsBoy = true, Name = "Максим Галкин", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 1, IsBoy = false, Name = "Алла Пугачева", Musics = await GetFullMusicDataBase() },
+                new Singer { ID = 2, IsBoy = false, Name = "Агата Кристи", Musics = await GetFullMusicDataBase() },
+                */
+                 
+            ];
         }
         public async Task<List<Music>> GetFullMusicDataBase()
         {
             await Task.Delay(100);
 
-            return new List<Music>()
-            {
-                new Music { ID = 0, Title = "Ляляля", Description = "Первая песенка певца"},
-                new Music { ID = 1, Title = "Лелеле", Description = "Вторая песенка певца"},
-                new Music { ID = 0, Title = "Лололо", Description = "Третья песенка певца"}
-            };
+            return
+            [
+                new() { ID = 0, Title = "Ляляля", Description = "Первая песенка певца"},
+                new() { ID = 1, Title = "Лелеле", Description = "Вторая песенка певца"},
+                new() { ID = 2, Title = "Лололо", Description = "Третья песенка певца"}
+            ];
         }
-
-
         public async Task AddMusic(Music music)
         {
-            await Task.Delay(1000);
+            await Task.Delay(500);
+            if(singers.Count == 0)
+                GetFullSingerDataBase();
 
             if (musics.Count == 0)
             {
                 music.ID = 0;
                 musics.Add(music);
+                AutoIncrementMusic++;
             }
             else
             {
-                music.ID = musics[^1].ID + 1;
+                music.ID = musics[^1].ID++;
                 musics.Add(music);
+                AutoIncrementMusic++;
+
             }
 
         }
@@ -72,14 +130,17 @@ namespace Computer
             if (singers.Count == 0)
                 singer.ID = 0;
             else
-                singer.ID = singers[^1].ID + 1;
+                singer.ID = singers[^1].ID++;
+
+            AutoIncrementSingers++;
+
 
             singers.Add(singer);
         }
 
         public async Task DeleteSinger(Singer singer)
         {
-            await Task.Delay(1000);
+            await Task.Delay(100);
 
             foreach (var m in singer.Musics)
                 DeleteMusic(m);
@@ -89,7 +150,7 @@ namespace Computer
 
         public async Task DeleteMusic(Music music)
         {
-            await Task.Delay(1000);
+            await Task.Delay(100);
 
             musics.Remove(music);
         }
@@ -125,7 +186,7 @@ namespace Computer
         public async Task<List<Singer>> GetAllSingers()
         {
             await Task.Delay(1000);
-            return new List<Singer>( await GetFullSingerDataBase());
+            return new List<Singer>( singers);
         }
 
         public async Task<List<Music>> GetAllMusics()
@@ -140,7 +201,10 @@ namespace Computer
 
             Singer s = await SearchSingerById(singer.ID);
 
-            singers[s.ID] = s;
+            foreach (var m in singer.Musics)
+            { EditMusic(m); }
+
+            singers[s.ID] = singer;
         }
         
         public async Task EditMusic(Music music)
@@ -149,7 +213,7 @@ namespace Computer
 
             Music m = await SearchMusicById(music.ID);
 
-            musics[m.ID] = m;
+            musics[m.ID] = music;
         }
     }
 }

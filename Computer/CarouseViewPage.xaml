@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Computer.CarouseViewPage"
+             Title="CarouseViewPage">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Margin="10" Padding="10" Stroke="Aqua" StrokeThickness="10">
+            <CarouselView ItemsSource="{Binding Singers}" CurrentItem="{Binding SelSinger}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame>
+                            <StackLayout>
+                                <Label Margin="0, 0, 10, 0" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding Name}"/>
+                                <Label Margin="0, 0, 10, 0" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding IsBoyChar}"/>
+
+                                <ListView ItemsSource="{Binding Musics}" SelectionMode="None">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <HorizontalStackLayout>
+                                                    <Label Margin="0, 0, 10, 0" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding Title}"/>
+                                                    <Label Margin="0, 0, 10, 0" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding Description}"/>
+                                                </HorizontalStackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+        </Border>
+
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0, 0, 0, 20">
+            <Button WidthRequest="80" Clicked="BackClick" Margin="0, 5, 0, 5" Text="Back"/>
+            <Button WidthRequest="80" Clicked="AddClick" Margin="10, 5, 0, 5" Text="Add"/>
+            <Button WidthRequest="80" Clicked="EditClick" Margin="10, 5, 0, 5" Text="Edit"/>
+            <Button WidthRequest="80" Clicked="DeleteClick" Margin="10, 5, 0, 5" Text="Delete"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>
